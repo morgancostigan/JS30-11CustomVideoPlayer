@@ -27,9 +27,16 @@ function updateButton() {
     console.log('update button');
 }//end updateButton function
 
+function skip() {
+    console.log('skippin');
+    
+}
+
 /* HOOK UP EVENT LISTENERS */ 
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
 
 toggle.addEventListener('click', togglePlay);
+
+skipButtons.forEach(button => button.addEventListener('click', skip));
