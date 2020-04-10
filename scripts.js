@@ -65,6 +65,8 @@ skipButtons.forEach(button => button.addEventListener('click', skip));
 ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
 ranges.forEach(range => range.addEventListener('mouseup', handleRangeUpdate));//ranges are 'volume' and 'playbackRate' 
 
+let mousedown = false;
 progress.addEventListener('click', scrub);
-progress.addEventListener('mousemove', scrub);
-// progress.addEventListener('mouseup', scrubUpdate);
+progress.addEventListener('mousemove', (e) => mousedown && scrub(e)); //will run scrub only if mousedown === true
+progress.addEventListener('mousedown', () => mousedown = true);
+progress.addEventListener('mouseup', () => mousedown = false);
