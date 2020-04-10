@@ -29,8 +29,8 @@ function updateButton() {
 
 function skip() {
     console.log('skippin');
-    
-}
+    video.currentTime += parseFloat(this.dataset.skip); //parseFloat turns this... into a number from a string
+}// end skip function
 
 /* HOOK UP EVENT LISTENERS */ 
 video.addEventListener('click', togglePlay);
