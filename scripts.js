@@ -1,4 +1,5 @@
 //GET OUR ELEMENTS
+
 const player = document.querySelector('.player');
 const video = player.querySelector('.viewer');
 const progress = player.querySelector('.progress');
@@ -6,8 +7,10 @@ const progressBar = player.querySelector('.progress__filled');
 const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
+const expand = player.querySelector('.expand');
 
 //BUILD OUT FUNCTIONS
+
 // function togglePlay() {
 //     if(video.paused){ //.paused is a built in video property
 //         video.play();
@@ -24,17 +27,17 @@ function togglePlay() {
 function updateButton() {
     const icon = this.paused ? '►' : '❚ ❚';
     toggle.textContent = icon;
-    console.log('update button');
+    // console.log('update button');
 }//end updateButton function
 
 function skip() {
-    console.log('skippin');
+    // console.log('skippin');
     video.currentTime += parseFloat(this.dataset.skip); //parseFloat turns this... into a number from a string
 }// end skip function
 
 function handleRangeUpdate() {
     video[this.name] = this.value; 
-    console.log(this.name, this.value);
+    // console.log(this.name, this.value);
 }//end handleRangeUpdate function 
 
 function handleProgress() {
@@ -48,9 +51,17 @@ function scrub(e) {
     // console.log(e);
 }//end scrub function
 
-function scrubUpdate(scrubtime) {
-
-}//end scrubUpdate function
+function toggleFullscreen() {
+    if (video.requestFullscreen){
+        video.requestFullscreen();
+    } else if (video.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        video.webkitRequestFullscreen();
+    } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+    } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen(); 
+    } //end fullscreen IF
+}//end toggleFullscreen function
 
 /* HOOK UP EVENT LISTENERS */ 
 video.addEventListener('click', togglePlay);
@@ -59,6 +70,9 @@ video.addEventListener('pause', updateButton);
 video.addEventListener('timeupdate', handleProgress);
 
 toggle.addEventListener('click', togglePlay);
+
+// let fullPlayer = false;
+expand.addEventListener('click', toggleFullscreen);
 
 skipButtons.forEach(button => button.addEventListener('click', skip));
 
